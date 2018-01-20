@@ -3,6 +3,7 @@
 const passport = require('passport');
 const User = require('../models/user');
 const FacebookStrategy = require('passport-facebook').Strategy;
+const secret = require('./../secret/secretFile');
 
 passport.serializeUser((user, done) => {
     done(null, user.id);
@@ -15,8 +16,8 @@ passport.deserializeUser((id, done) => {
 });
 
 passport.use(new FacebookStrategy({
-    clientID: '',
-    clientSecret: '',
+    clientID: secret.clientIDfacebook,
+    clientSecret: secret.clientSecretfacebook,
     profileFields: ['email', 'displayName', 'photos'],
     callbackURL: 'http://localhost:3000/auth/facebook/callback',
     passReqToCallback: true
